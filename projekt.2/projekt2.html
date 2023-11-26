@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="PL">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style1.css">
+  <title>Kalkulator Bankowy</title>
+</head>
+<body>
+
+
+  <h1>KALKULATOR BANKOWY</h1>
+
+  <div class="kalkulatorki">
+  
+    <form id="kalkulatorKredytowy">
+      <h2>Kalkulator Kredytowy</h2>
+      <label for="kwotaKredytu">Kwota kredytu:</label>
+      <input type="number" id="kwotaKredytu"  required >
+
+      <label for="okresKredytu">Okres trwania kredytu (w latach):</label>
+      <input type="number" id="okresKredytu"  required >
+
+      <button type="button" onclick="obliczKredyt()">Oblicz</button>
+
+      <h2>Wynik:</h2>
+      <p id="wynikKredytu"></p>
+    </form>
+	
+	<header>
+      <img src="kalk.jpg" alt="Kalkulator Image">
+    </header>
+
+   
+    <form id="kalkulatorLokaty">
+      <h2>Kalkulator Lokaty</h2>
+      <label for="kwotaLokaty">Kwota lokaty:</label>
+      <input type="number" id="kwotaLokaty"  required>
+
+      <label for="okresLokaty">Okres trwania lokaty (w latach):</label>
+      <input type="number" id="okresLokaty" required>
+
+      <button type="button" onclick="obliczLokate()">Oblicz</button>
+
+      <h2>Wynik:</h2>
+      <p id="wynikLokaty"></p>
+    </form>
+  </div>
+
+  <script>
+    function obliczKredyt() {
+      var kwota = document.getElementById('kwotaKredytu').value;
+      var okres = document.getElementById('okresKredytu').value;
+      var oprocentowanie = 5; 
+
+      var rata = (kwota * oprocentowanie / 100) / 12 / (1 - Math.pow(1 + oprocentowanie / 100 / 12, -okres * 12));
+      var calkowitaKwota = rata * okres * 12;
+
+      document.getElementById('wynikKredytu').innerHTML = "Miesięczna rata: " + rata.toFixed(2) + " PLN<br>" +
+                                                      "Całkowita kwota do spłaty: " + calkowitaKwota.toFixed(2) + " PLN";
+    }
+
+    function obliczLokate() {
+      var kwota = document.getElementById('kwotaLokaty').value;
+      var okres = document.getElementById('okresLokaty').value;
+      var oprocentowanie = 3.2; 
+
+      var odsetki = (kwota * oprocentowanie / 100) * okres;
+      var calkowitaKwota = parseFloat(kwota) + odsetki;
+
+      document.getElementById('wynikLokaty').innerHTML = "Zysk z lokaty: " + odsetki.toFixed(2) + " PLN<br>" +
+                                                      "Całkowita kwota po lokacie: " + calkowitaKwota.toFixed(2) + " PLN";
+    }
+  </script>
+</body>
+</html>
